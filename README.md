@@ -12,53 +12,45 @@ See the following documentation [How to install Terraform](https://learn.hashico
 
 # How to
 
-1. Clone the repository to your local machine
+- Fork the repository to your own environment
+- Clone the forked repository to your local machine
 ```
 git clone https://github.com/munnep/terraform_working_directory.git
 ```
-2. Change your directory
+- Change your directory
 ```
 cd terraform_working_directory/create_workspace
 ```
-3. Terraform initialize
+- Crate a file called `terraform.auto.tfvars` with the following content
+```
+organization_name = "patrickmunne"                      # organization name within Terraform Cloud
+vcs_repo = "munnep/terraform_working_directory"         # name of your vcs repository
+vcs_oauth_token_id = "ot-sDcTZi4a9mAAAPP"               # the oauth_token configured in Terraform Cloud to access the former repository
+```
+- Terraform initialize
 ```
 terraform init
 ```
-5. Terraform plan
+- Terraform plan
 ```
 terraform plan
 ```
-6. Terraform apply
+- Terraform apply
 ```
 terraform apply
 ```
-7. Sample output
+- Sample output
 ```
-...
-...
-...
-Changes to Outputs:
-  + pet1 = (known after apply)
+tfe_workspace.test: Creating...
+tfe_workspace.test: Creation complete after 1s [id=ws-vDQQevWeT5zJm31y]
 
-Do you want to perform these actions?
-  Terraform will perform the actions described above.
-  Only 'yes' will be accepted to approve.
-
-  Enter a value: yes
-
-null_resource.mynull["zero"]: Destroying... [id=755334703710489610]
-null_resource.mynull["one"]: Destroying... [id=258993261195552396]
-null_resource.mynull["one"]: Destruction complete after 0s
-null_resource.mynull["zero"]: Destruction complete after 0s
-random_pet.pet1: Creating...
-random_pet.pet1: Creation complete after 0s [id=adapting-condor]
-
-Apply complete! Resources: 1 added, 0 changed, 2 destroyed.
-
-Outputs:
-
-pet1 = "adapting-condor"
-...
-...
-...
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
+- Within Terraform Cloud you should now have a workspace named `example-terraform-working-directory`
+
+![](media/20230403133611.png)  
+
+- Under the `General Settings` of the workspace you should see where terraform executes the code from
+![](media/20230403133702.png)  
+- It should have reached out to the repository configured and do a run
+![](media/20230403133753.png)  
